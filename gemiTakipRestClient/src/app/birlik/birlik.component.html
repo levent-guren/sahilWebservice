@@ -1,0 +1,47 @@
+<div class="sayfa">
+    <div class="form">
+        <form [formGroup]="form">
+            <div class="formDiv mb-2">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="birlikAdi">Birlik Adı</label>
+                    <div class="col-sm-7">
+                        <input formControlName="birlikAdi"
+                           type="text" class="form-control" id="birlikAdi" aria-describedby="birlik adı">
+                    </div>
+                </div>
+                <div class="form-group row mt-2">
+                    <label class="col-sm-3 col-form-label" for="birlikIl">Birlik İl</label>
+                    <div class="col-sm-7">
+                    <input formControlName="birlikIl"
+                           type="text" class="form-control" id="birlikIl" aria-describedby="birlik il">
+                </div>
+                </div>
+            </div>
+        </form>
+        <button class="btn btn-primary" (click)="birlikEkle()">Ekle</button>
+        @if (seciliBirlikId != 0) {
+            <button class="btn btn-warning ms-2" (click)="birlikGuncelle()">Güncelle</button>
+            <button class="btn btn-danger ms-2" (click)="birlikSil()">Sil</button>
+        }
+    </div>
+    <div class="mt-2">
+        <table class="table table-hover tablo">
+            <thead>
+                <tr>
+                    <th>Adı</th>
+                    <th>İl</th>
+                    <th>Toplam Gemi Sayısı</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (birlik of birlikler; track birlik.id) {
+                <tr [class.table-warning]="birlik.id == seciliBirlikId" (click)="birlikSec(birlik)">
+                    <td>{{ birlik.adi }}</td>
+                    <td>{{ birlik.il }}</td>
+                    <td>{{ birlik.toplamGemiSayisi }}</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
